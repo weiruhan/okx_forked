@@ -11,15 +11,15 @@ class AccountSPOT():
             key: str,
             secret: str,
             passphrase: str,
+            flag = '0',
             proxies={},
             proxy_host: str = None,
     ):
-        FLAG = '0'
         self.api = AccountAPI(
             key=key,
             secret=secret,
             passphrase=passphrase,
-            flag=FLAG,
+            flag=flag,
             proxies=proxies,
             proxy_host=proxy_host,
         )

@@ -12,18 +12,20 @@ class OkxSPOT():
                  key: str,
                  secret: str,
                  passphrase: str,
+                 flag: str = '0',
                  timezone: str = 'Asia/Shanghai',
                  proxies={},
                  proxy_host: str = None,
                  ):
         self.account = AccountSPOT(
-            key=key, secret=secret, passphrase=passphrase, proxies=proxies, proxy_host=proxy_host,
+            key=key, secret=secret, passphrase=passphrase, flag=flag, proxies=proxies, proxy_host=proxy_host,
         )
         self.market = MarketSPOT(
-            key=key, secret=secret, passphrase=passphrase, timezone=timezone, proxies=proxies, proxy_host=proxy_host,
+            key=key, secret=secret, passphrase=passphrase, flag=flag, timezone=timezone, proxies=proxies, proxy_host=proxy_host,
         )
         self.trade = TradeSPOT(
             key=key, secret=secret, passphrase=passphrase,
+            flag=flag, 
             timezone=timezone,
             account=self.account,
             market=self.market,
@@ -37,18 +39,20 @@ class OkxSWAP():
                  key: str,
                  secret: str,
                  passphrase: str,
+                 flag: str = '0',
                  timezone: str = 'Asia/Shanghai',
                  proxies={},
                  proxy_host: str = None,
                  ):
         self.account = AccountSWAP(
-            key=key, secret=secret, passphrase=passphrase, proxies=proxies, proxy_host=proxy_host,
+            key=key, secret=secret, passphrase=passphrase, flag=flag, proxies=proxies, proxy_host=proxy_host,
         )
         self.market = MarketSWAP(
-            key=key, secret=secret, passphrase=passphrase, timezone=timezone, proxies=proxies, proxy_host=proxy_host,
+            key=key, secret=secret, passphrase=passphrase, flag=flag, timezone=timezone, proxies=proxies, proxy_host=proxy_host,
         )
         self.trade = TradeSWAP(
             key=key, secret=secret, passphrase=passphrase,
+            flag=flag, 
             timezone=timezone,
             account=self.account,
             market=self.market,

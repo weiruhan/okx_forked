@@ -41,6 +41,7 @@ class OkxSWAP():
                  passphrase: str,
                  flag: str = '0',
                  timezone: str = 'Asia/Shanghai',
+                 posmode: str = 'long_short_mode',
                  proxies={},
                  proxy_host: str = None,
                  ):
@@ -56,6 +57,7 @@ class OkxSWAP():
             timezone=timezone,
             account=self.account,
             market=self.market,
+            posmode=posmode,
             proxies=proxies,
             proxy_host=proxy_host,
         )

@@ -47,9 +47,9 @@ class Ticker(MarketBase):
         result['data'] = result['data'][0]
         return result
 
-    # 获取产品轻量深度
-    def get_books_lite(self, instId: str):
-        result = self.marketAPI.get_books_lite(instId=instId)
+    # 获取产品完整深度
+    def get_books_full(self, instId: str, sz: int = 1):
+        result = self.marketAPI.get_books_full(instId=instId,sz=sz)
         if result['code'] != '0':
             return result
         result['data'] = result['data'][0]

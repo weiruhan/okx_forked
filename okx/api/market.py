@@ -10,7 +10,7 @@ class _MarketEndpoints():
     get_tickers = ['/api/v5/market/tickers', 'GET']  # GET / 获取所有产品行情信息
     get_ticker = ['/api/v5/market/ticker', 'GET']  # GET / 获取单个产品行情信息
     get_books = ['/api/v5/market/books', 'GET']  # GET / 获取产品深度
-    get_books_lite = ['/api/v5/market/books-lite', 'GET']  # GET / 获取产品轻量深度
+    get_books_full = ['/api/v5/market/books-full', 'GET']  # GET / 获取产品完整深度
     get_candles = ['/api/v5/market/candles', 'GET']  # GET / 获取交易产品K线数据
     get_history_candles = ['/api/v5/market/history-candles', 'GET']  # GET / 获取交易产品历史K线数据
     get_trades = ['/api/v5/market/trades', 'GET']  # GET / 获取交易产品公共成交数据
@@ -114,13 +114,14 @@ class Market(Client):
         '''
         return self.send_request(*_MarketEndpoints.get_books, **to_local(locals()))
 
-    # GET / 获取产品轻量深度
-    def get_books_lite(self, instId: str, proxies={}, proxy_host: str = None):
+    # GET / 获取产品完整深度
+    def get_books_full(self, instId: str, sz: str = '', proxies={}, proxy_host: str = None):
         '''
-        可以更快地获取前25档的深度信息。
-        https://www.okx.com/docs-v5/zh/#order-book-trading-market-data-get-order-lite-book
+        获取产品深度列表。数据每秒更新一次。在提前挂单阶段，best ask的价格有机会低于best bid。
+        该接口收到请求后不会立刻返回，而是会待服务端缓存数据更新后立即返回最新数据。
+        https://www.okx.com/docs-v5/zh/#order-book-trading-market-data-get-full-order-book
         
-        限速：6次/1s
+        限速：10次/2s
         限速规则：IP
     
         请求参数:
@@ -133,7 +134,7 @@ class Market(Client):
         bids              	Array   	买方深度
         ts                	String  	深度产生的时间
         '''
-        return self.send_request(*_MarketEndpoints.get_books_lite, **to_local(locals()))
+        return self.send_request(*_MarketEndpoints.get_books_full, **to_local(locals()))
 
     # GET / 获取交易产品K线数据
     def get_candles(self, instId: str, bar: str = '', after: str = '', before: str = '', limit: str = '', proxies={},
